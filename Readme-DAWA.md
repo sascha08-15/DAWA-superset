@@ -32,3 +32,8 @@ Die wesentlichen Schritte werden hier beschrieben. Da die verwendete Software Ä
  * Username: dawauser
  * Passwort: dawapass
  * Port: 5432
+
+ ## Apache NIFI
+ * URL https://localhost:8443/
+ * Username: admin
+ * Passwort: adminadminadmin
