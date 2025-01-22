@@ -28,7 +28,7 @@ Die wesentlichen Schritte werden hier beschrieben. Da die verwendete Software Ä
  * Passwort: examples
  * Port: 5432
  ## Eine Postgres Datenbank für ihr DAWA Projekt
- * Connection String: postgresql://DAWA-user:DAWA-pass@db:5432/DAWA
+ * Connection String: postgresql://dawauser:dawapass@db:5432/dawa
  * Username: DAWA-user
  * Passwort: DAWA-pass
  * Port: 5432
