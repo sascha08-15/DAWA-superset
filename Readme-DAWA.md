@@ -23,12 +23,12 @@ Die wesentlichen Schritte werden hier beschrieben. Da die verwendete Software Ä
  * Navigiere zur URL http://localhost:8088
  * Einloggen mit username: admin und password: admin
  ## Eine Postgres Beispiel Datenbank
- * Connection String: postgresql://examples:examples@db:5432/examples
+ * Connection String: ```postgresql://examples:examples@db:5432/examples```
  * Username: examples
  * Passwort: examples
  * Port: 5432
  ## Eine Postgres Datenbank für ihr DAWA Projekt
- * Connection String: postgresql://dawauser:dawapass@db:5432/dawa
- * Username: DAWA-user
- * Passwort: DAWA-pass
+ * Connection String: ```postgresql://dawauser:dawapass@db:5432/dawa```
+ * Username: dawauser
+ * Passwort: dawapass
  * Port: 5432
