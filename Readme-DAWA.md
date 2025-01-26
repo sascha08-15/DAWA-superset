@@ -50,61 +50,8 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
  * Passwort: dawapass
  * Port: 5432
 
-# Datenbank in Nifi einrichten
- ## Füge Sie ein Contoller Service hinzu
- * DB Connection URL: ```jdbc:postgresql://db:5432/dawa```
- * Database Driver Class Name: ```org.postgresql.Driver```
- * Database User & Password: (siehe oben, Verfügbare Services)
- * Database Driver Location(s): ```/opt/nifi/nifi-current/lib/postgresql-42.2.8.jar```
- * Klicken Sie auf "Verification"
- ## Prüfen Sie die Verification
- Sie sollten folgende Bestätigungen erhalten:
- * Perform Validation: Component Validation passed
- * Configure Data Source: Successfully configured data source
- * Establish Connection: Successfully established Database Connection
-## Benennen Sie den Controller Service sinnvoll
- * Unter Settings können Sie einen Namen für den Controller Service vergeben
- * Es handelt sich um die Postgres Datenbank - vergeben Sie einen sinnvollen, sprechenden Namen für diesen Datenverbindungspool
-
- ## Interagieren Sie mit der Postgres Datenbank
- * Lesen Sie ```https://nifi.apache.org/docs/nifi-docs/html/getting-started.html#i-started-nifi-now-what```
- 
-## SQLite Datenbank in Nifi anbinden
-* **Copy** SQLite DB to staging directory in the docker directory (nifi-staging).
-* Add a processor to your flow and use the ```DBCPConnectionPool``` as Database Connection Pool Service - create a new service and "Go to Service" to configure it.
-* Driver path: ```/opt/nifi/nifi-current/lib/sqlite-jdbc-3.48.0.0.jar```
-* Driver class: ```org.sqlite.JDBC```
-* Connection string: ```jdbc:sqlite:/opt/nifi/nifi-current/data/dawa.sqlite```
-* SQL Select Query: ```select * from Person``` to query all columns from the Table Person.
-* **Verify** the controller service
-* **Enable** the controller service
-* Die Datenquelle ist nun über den Service angebunden
-
-
-## Daten in PostgresDB schreiben
-* Erstellen Sie einen Processor ```PutDatabaseRecord```
-* Nutzen Sie ```AvroReader``` als Record Reader
-* Hintergrund: der Processor ```ExecuteSQL
-* Erstellen Sie einen neuen Controller Service für den Record Reader
-* Gehen Sie zum Service und klicken Sie auf ```enable```
-* Als Database Type wählen Sie ```PostgreSQL``` aus.
-* Add a processor to your flow and use the ```DBCPConnectionPool``` as Database Connection Pool Service - create a new service and "Go to Service" to configure it. (siehe oben)
-* Geben Sie den  ```Table Name ``` an, z.B. vornamen
-* Als  ```Statement Type ``` verwenden Sie  ```INSERT```
-* Verifizieren Sie den Processor
-* Erstellen Sie zunächste eine Zieltabelle mit dem DBeaver in der Postgre Datenbank ```dawa```
-* Stellen Sie sicher, dass der oben gewählte Tabllenname übereinstimmt (hier: vorname)
-* In DBeaver können Sie die Tabelle über die UI oder auch im SQL editor erstellen, z.B.:
-```CREATE TABLE public.vorname (
-	name text NULL,
-	bestellungen int NULL,
-	id varchar NOT NULL,
-	CONSTRAINT vorname_pk PRIMARY KEY (id)
-);```
-
-* Unter Relationships aktivieren Sie ```terminate``` bei failure, retry und success.
-
-## Datenbanken einsehen
-* Laden sie sich den DBeaver Community Edition herunter und installieren sie diesen
-* URL: https://dbeaver.io/download/
-* Richten Sie sowohl die Datenquelle für Postgres ein als auch für die SQLite Datenbank
+ ## Apache NIFI
+ * Navigiere zur URL https://localhost:18443/
+ * Einloggen mit u.s. Informationen
+ * Username: admin
+ * Passwort: adminadminadmin
