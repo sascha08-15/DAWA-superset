@@ -4,6 +4,9 @@ Die wesentlichen Schritte werden hier beschrieben. Da die verwendete Software Ä
 * Aktuelle Dokumentation von Docker: https://docs.docker.com/get-started/introduction/
 * Aktuelle Dokumentation von Git: https://git-scm.com/doc
 * Aktuelle Dokumentation von Superset: https://superset.apache.org/docs/quickstart/
+* Aktuelle Dokumentation von Nifi: https://nifi.apache.org/components/
+* Aktuelle Dokumentation von PostgreSQL: https://www.postgresql.org/docs/
+* Aktuelle Dokumentation von SQLite: https://www.sqlite.org/docs.html
 
 
 # Voraussetzungen
@@ -22,11 +25,11 @@ Die Komponenten sind prinzipiell alle so in dem Docker-Compose-File konfiguriert
 
 Bei Fragen, schauen Sie zuerst in diese Anleitung, danach in die jeweilige Dokumentation. Versuchen Sie das Problem zu lokalisieren und analysieren Sie selbst. Verwenden Sie AI (Copilot, ChatGPT, Gemini, etc.) - die verwendeten Komponenten sind den AI Tools bestens bekannt.
 Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
-* 1) Was ist das Problem? 
-* 2) Was sagt die Dokumentation?
-* 3) Was sagt GenAI tools?
-* 4) Was sind versuchte Lösungsansätze?
-* 5) Wie sieht ein möglicher Workaround aus?
+ 1) Was ist das Problem? 
+ 2) Was sagt die Dokumentation?
+ 3) Was sagt GenAI tools?
+ 4) Was sind versuchte Lösungsansätze?
+ 5) Wie sieht ein möglicher Workaround aus?
   
 # Apache Superset über Docker Compose starten
 * Starten Sie eine console/terminal und navigieren sie zum gewünschten Verzeichnis (z.B. ```mkdir DATA``` und ```cd ~/DAWA```)
@@ -37,7 +40,7 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 
 # Verfügbare Services
  ## Die Apache Superset Umgebung 
- * Navigiere zur URL http://localhost:8088
+ * Navigiere zur URL http://localhost:18088
  * Einloggen mit username: admin und password: admin
  ## Eine Postgres Beispiel Datenbank
  * Connection String: ```postgresql://examples:examples@db:5432/examples```
@@ -111,12 +114,14 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 * Erstellen Sie zunächste eine Zieltabelle mit dem DBeaver in der Postgre Datenbank ```dawa```
 * Stellen Sie sicher, dass der oben gewählte Tabllenname übereinstimmt (hier: vorname)
 * In DBeaver können Sie die Tabelle über die UI oder auch im SQL editor erstellen, z.B.:
-```CREATE TABLE public.vorname (
-	name text NULL,
-	bestellungen int NULL,
-	id varchar NOT NULL,
-	CONSTRAINT vorname_pk PRIMARY KEY (id)
-);```
+  ```sql
+  CREATE TABLE public.vorname (
+    name text NULL,
+    bestellungen int NULL,
+    id varchar NOT NULL,
+    CONSTRAINT vorname_pk PRIMARY KEY (id)
+  );
+  ```
 
 * Unter Relationships aktivieren Sie ```terminate``` bei failure, retry und success.
 
@@ -125,9 +130,11 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 * URL: https://dbeaver.io/download/
 * Richten Sie sowohl die Datenquelle für Postgres ein als auch für die SQLite Datenbank
 
+## 
+
 ## SQLite Datenbank
 
-```
+```sql
 SELECT 
   count(*) AS count, 
   va.name, 
@@ -147,7 +154,7 @@ GROUP BY year, va.name having YEAR < 2024
 
 Ihr Kollege schlägt vor zu analysieren welche Dokumente über die Jahre und Quartale eingereicht wurden für die Visaanträge.
 Dazu schlägt er folgendes Query vor:
-```
+```sql
 SELECT 
   count(*) AS count, 
   va.name, 
@@ -164,3 +171,8 @@ FROM visa_application va, visa_application_documents vad, document d
 where vad.documents_id = d.id AND vad.visa_application_id = va.id 
 GROUP BY year, va.name, d.name having YEAR < 2024
 ```
+
+# Kontrollfragen
+* Was bemerken Sie beim Ausführen?
+* Welche Auswirkungen haben die o.s. SQL Statements wenn sie während dem Betrieb an die Datenquelle gestellt werden?
+* Wie lässt sich das vermeiden?
