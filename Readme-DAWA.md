@@ -103,7 +103,6 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 ## Daten in PostgresDB schreiben
 * Erstellen Sie einen Processor ```PutDatabaseRecord```
 * Nutzen Sie ```AvroReader``` als Record Reader
-* Hintergrund: der Processor ```ExecuteSQL
 * Erstellen Sie einen neuen Controller Service für den Record Reader
 * Gehen Sie zum Service und klicken Sie auf ```enable```
 * Als Database Type wählen Sie ```PostgreSQL``` aus.
