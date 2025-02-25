@@ -44,8 +44,8 @@ services:
     env_file:
       - path: docker/.env-nifi
         required: true
-    image: apache/nifi:2.2.0
-    user: "1003:1003"
+    build: ./nifi
+    #image: apache/nifi:2.2.0
     container_name: nifi
     restart: unless-stopped
     ports:
