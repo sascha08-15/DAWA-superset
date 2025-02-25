@@ -31,26 +31,32 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
  4) Was sind versuchte Lösungsansätze?
  5) Wie sieht ein möglicher Workaround aus?
   
-# Apache Superset über Docker Compose starten
+# Apache Superset & Apache Nifi über Docker Compose starten
 * Starten Sie eine console/terminal und navigieren sie zum gewünschten Verzeichnis (z.B. ```mkdir DATA``` und ```cd ~/DAWA```)
-* Clonen Sie das Repository mit ```git clone https://github.com/apache/superset.git```
-* Navigieren Sie in das neu erstelle Verzeichnis ```cd superset```
-* Mit ```git checkout tags/4.1.1``` verwenden Sie genau eine stabile Release-Version
-* Starten Sie Apache Superset mit ```docker compose -f docker-compose-image-tag.yml up```
+* Clonen Sie das Repository mit ```git clone https://github.com/sascha08-15/DAWA-superset```
+* Navigieren Sie in das neu erstelle Verzeichnis ```cd DAWA-superset```
+* Starten Sie die Services mit ```docker compose up```
+* Das initiale Starten der Services kann einen Moment dauern, da Beispieldaten heruntergeladen werden
+  * Superset Beispieldaten von verschiedenen Quellen werden in eine PostgreSQL Datenbank heruntergeladen
+  * Anlegen verschiederner Datasets und Dashboards in Superset zum illustrieren der Funktionalität (Datenquelle dabei ist die PostgreSQL Datenbank `example`)
+  * Eine SQLite Datenbank von `https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download` wird in das Verzeichnis `nifi-staging` herunter geladen
 
 # Verfügbare Services
  ## Die Apache Superset Umgebung 
- * Navigiere zur URL http://localhost:18088
- * Einloggen mit username: admin und password: admin
+ * Navigiere zur URL http://localhost:18088, wobei Sie `localhost` mit dem Ihnen zugeteilten Hostnamen ersetzt müssen.
+ * Akzeptieren Sie etwaig unsicheren Zugriff (wegen des nicht offiziellen HTTPs SSL-Zertifikats).
+ * Einloggen mit
+    * Username: `admin`
+    * Password: `admin`
  ## Eine Postgres Beispiel Datenbank
  * Connection String: ```postgresql://examples:examples@db:5432/examples```
- * Username: examples
- * Passwort: examples
+ * Username: `examples`
+ * Passwort: `examples`
  * Port: 5432
  ## Eine Postgres Datenbank für ihr DAWA Projekt
  * Connection String: ```postgresql://dawauser:dawapass@db:5432/dawa```
- * Username: dawauser
- * Passwort: dawapass
+ * Username: `dawauser`
+ * Passwort: `dawapass`
  * Port: 5432
 
  ## Redis Cache
@@ -60,9 +66,9 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 
  ## Apache NIFI
  * Navigiere zur URL https://localhost:18443/
- * Einloggen mit u.s. Informationen
- * Username: admin
- * Passwort: adminadminadmin
+ * Einloggen mit
+  * Username: `admin`
+  * Passwort: `adminadminadmin`
  * Verfügbare Datenbank Treiber: PostgreSQL, SQLite
  * Getting started guide ```https://nifi.apache.org/nifi-docs/getting-started.html```
 
