@@ -37,9 +37,8 @@ DAWA_DB_PATH="/opt/nifi/nifi-current/data/dawa.sqlite"
 if [ -f "$DAWA_DB_PATH" ]; then
     echo "SQLite DB already exists at $DAWA_DB_PATH"
 else
-    chmod 775 /opt/nifi/nifi-current/data
     echo "Downloading DAWA SQLite DB..."
-    curl -o "$DAWA_DB_PATH" https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download
+    curl -o "$DAWA_DB_PATH" https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download &
 fi
 
 
