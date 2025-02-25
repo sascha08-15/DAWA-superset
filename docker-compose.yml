@@ -45,10 +45,11 @@ services:
       - path: docker/.env-nifi
         required: true
     image: apache/nifi:2.2.0
+    user: "1003:1003"
     container_name: nifi
     restart: unless-stopped
     ports:
-      - "18080:8080"  # HTTP
+      #- "18080:8080"  # HTTP
       - "18443:18443"  # HTTPS
     volumes:
       - ./docker/docker-entrypoint-initnifi.d/nifi-init.sh:/opt/nifi/scripts/custom-entrypoint.sh
