@@ -80,10 +80,10 @@ prop_replace 'nifi.cluster.protocol.is.secure'  'false'
 "${scripts_dir}/toolkit.sh"
 prop_replace 'baseUrl' "http://${NIFI_WEB_HTTP_HOST}:${NIFI_WEB_HTTP_PORT}" ${nifi_toolkit_props_file}
 
-#prop_replace 'keystore'           "${NIFI_HOME}/conf/keystore.p12"      ${nifi_toolkit_props_file}
-#prop_replace 'keystoreType'       "PKCS12"                              ${nifi_toolkit_props_file}
-#prop_replace 'truststore'         "${NIFI_HOME}/conf/truststore.p12"    ${nifi_toolkit_props_file}
-#prop_replace 'truststoreType'     "PKCS12"                              ${nifi_toolkit_props_file}
+prop_replace 'keystore'           ""      ${nifi_toolkit_props_file}
+prop_replace 'keystoreType'       ""                              ${nifi_toolkit_props_file}
+prop_replace 'truststore'         ""    ${nifi_toolkit_props_file}
+prop_replace 'truststoreType'     ""                              ${nifi_toolkit_props_file}
 
 if [ -z "${NIFI_WEB_PROXY_HOST}" ]; then
     echo 'NIFI_WEB_PROXY_HOST was not set but NiFi is configured to run in a secure mode. The NiFi UI may be inaccessible if using port mapping or connecting through a proxy.'
@@ -132,29 +132,24 @@ fi
 
 . "${scripts_dir}/update_cluster_state_management.sh"
 
-# Check if we are secured or unsecured
-case ${AUTH} in
-    tls)
-        echo 'Enabling Two-Way SSL user authentication'
-        . "${scripts_dir}/secure.sh"
-        ;;
-    ldap)
-        echo 'Enabling LDAP user authentication'
-        # Reference ldap-provider in properties
-        export NIFI_SECURITY_USER_LOGIN_IDENTITY_PROVIDER="ldap-provider"
-
-        . "${scripts_dir}/secure.sh"
-        . "${scripts_dir}/update_login_providers.sh"
-        ;;
-    oidc)
-        echo 'Enabling OIDC user authentication'
-
-        . "${scripts_dir}/secure.sh"
-        . "${scripts_dir}/update_oidc_properties.sh"
-        ;;
-esac
-
 echo "Nifi about to start"
+
+prop_replace 'nifi.security.keystore'           "${KEYSTORE_PATH}"
+prop_replace 'nifi.security.keystoreType'       "${KEYSTORE_TYPE}"
+prop_replace 'nifi.security.keystorePasswd'     "${KEYSTORE_PASSWORD}"
+prop_replace 'nifi.security.keyPasswd'          "${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+prop_replace 'nifi.security.truststore'         "${TRUSTSTORE_PATH}"
+prop_replace 'nifi.security.truststoreType'     "${TRUSTSTORE_TYPE}"
+prop_replace 'nifi.security.truststorePasswd'   "${TRUSTSTORE_PASSWORD}"
+
+prop_replace 'keystore'           "${KEYSTORE_PATH}"                    ${nifi_toolkit_props_file}
+prop_replace 'keystoreType'       "${KEYSTORE_TYPE}"                    ${nifi_toolkit_props_file}
+prop_replace 'keystorePasswd'     "${KEYSTORE_PASSWORD}"                ${nifi_toolkit_props_file}
+prop_replace 'keyPasswd'          "${KEY_PASSWORD:-$KEYSTORE_PASSWORD}" ${nifi_toolkit_props_file}
+prop_replace 'truststore'         "${TRUSTSTORE_PATH}"                  ${nifi_toolkit_props_file}
+prop_replace 'truststoreType'     "${TRUSTSTORE_TYPE}"                  ${nifi_toolkit_props_file}
+prop_replace 'truststorePasswd'   "${TRUSTSTORE_PASSWORD}"              ${nifi_toolkit_props_file}
+
 
 # Continuously provide logs so that 'docker logs' can produce them
 "${NIFI_HOME}/bin/nifi.sh" run &
