@@ -35,10 +35,23 @@ DAWA_DB_PATH="/opt/nifi/nifi-current/data/dawa.sqlite"
 
 # Check if the file already exists
 if [ -f "$DAWA_DB_PATH" ]; then
-    echo "SQLite DB already exists at $DAWA_DB_PATH"
+    echo "Checking if SQLite DB is complete..."
+    
+    # Get remote file size
+    REMOTE_SIZE=$(curl -sI https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download | grep -i Content-Length | awk '{print $2}' | tr -d '\r')
+
+    # Get local file size
+    LOCAL_SIZE=$(stat -c %s "$DAWA_DB_PATH" 2>/dev/null)
+
+    if [ "$LOCAL_SIZE" -eq "$REMOTE_SIZE" ]; then
+        echo "SQLite DB is already fully downloaded at $DAWA_DB_PATH"
+    else
+        echo "Incomplete file detected. Resuming download..."
+        curl -C - -o "$DAWA_DB_PATH" https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download &
+    fi
 else
     echo "Downloading DAWA SQLite DB..."
-    curl -o "$DAWA_DB_PATH" https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download &
+    curl -C - -o "$DAWA_DB_PATH" https://drive.switch.ch/index.php/s/iDQFw6FzI8d5S5w/download &
 fi
 
 scripts_dir='/opt/nifi/scripts'
