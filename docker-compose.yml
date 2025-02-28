@@ -49,7 +49,6 @@ services:
     container_name: nifi
     restart: unless-stopped
     ports:
-     # - "18443:18443"  # HTTPS
       - "18443:8080" #HTTP
     volumes:
       - ./docker/docker-entrypoint-initnifi.d/nifi-init.sh:/opt/nifi/scripts/custom-entrypoint.sh
