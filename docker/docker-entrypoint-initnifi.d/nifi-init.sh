@@ -146,7 +146,7 @@ fi
 . "${scripts_dir}/update_cluster_state_management.sh"
 
 
-echo "Nifi about to start"
+
 
 prop_replace 'nifi.security.keystore'           "${KEYSTORE_PATH}"
 prop_replace 'nifi.security.keystoreType'       "${KEYSTORE_TYPE}"
@@ -164,13 +164,14 @@ prop_replace 'truststore'         "${TRUSTSTORE_PATH}"                  ${nifi_t
 prop_replace 'truststoreType'     "${TRUSTSTORE_TYPE}"                  ${nifi_toolkit_props_file}
 prop_replace 'truststorePasswd'   "${TRUSTSTORE_PASSWORD}"              ${nifi_toolkit_props_file}
 
+echo "Nifi about to start"
 
 # Continuously provide logs so that 'docker logs' can produce them
 "${NIFI_HOME}/bin/nifi.sh" run &
 nifi_pid="$!"
 tail -F --pid=${nifi_pid} "${NIFI_HOME}/logs/nifi-app.log" &
 
-trap 'echo Received trapped signal, beginning shutdown...;./bin/nifi.sh stop;exit 0;' TERM HUP INT;
+trap 'echo Received trapped signal, beginning shutdown...;/opt/nifi/nifi-current/bin/nifi.sh stop;exit 0;' TERM HUP INT;
 trap ":" EXIT
 
 echo NiFi running with PID ${nifi_pid}.
