@@ -79,11 +79,10 @@ prop_replace 'nifi.cluster.protocol.is.secure'  'false'
 # Set nifi-toolkit properties files and baseUrl
 "${scripts_dir}/toolkit.sh"
 prop_replace 'baseUrl' "http://${NIFI_WEB_HTTP_HOST}:${NIFI_WEB_HTTP_PORT}" ${nifi_toolkit_props_file}
-
-#prop_replace 'keystore'           "${NIFI_HOME}/conf/keystore.p12"      ${nifi_toolkit_props_file}
-#prop_replace 'keystoreType'       "PKCS12"                              ${nifi_toolkit_props_file}
-#prop_replace 'truststore'         "${NIFI_HOME}/conf/truststore.p12"    ${nifi_toolkit_props_file}
-#prop_replace 'truststoreType'     "PKCS12"                              ${nifi_toolkit_props_file}
+prop_replace 'keystore'           "${NIFI_HOME}/conf/keystore.p12"      ${nifi_toolkit_props_file}
+prop_replace 'keystoreType'       "PKCS12"                              ${nifi_toolkit_props_file}
+prop_replace 'truststore'         "${NIFI_HOME}/conf/truststore.p12"    ${nifi_toolkit_props_file}
+prop_replace 'truststoreType'     "PKCS12"                              ${nifi_toolkit_props_file}
 
 if [ -z "${NIFI_WEB_PROXY_HOST}" ]; then
     echo 'NIFI_WEB_PROXY_HOST was not set but NiFi is configured to run in a secure mode. The NiFi UI may be inaccessible if using port mapping or connecting through a proxy.'
