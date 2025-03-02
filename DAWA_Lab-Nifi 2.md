@@ -48,6 +48,12 @@ In dieser Übung werden Sie mit ETL (Extract, Transform, Load) vertraut. Dazu ve
 
 # Kontollfragen
 
+* Welche Rolle spielt Redis in der Datenpipeline?
+* Was passiert mit der CSV Datei, nachdem es gelesen wurde?
+* Was passiert mit den Daten, nachdem sie aus dem CSV gelesen wurden?
+* Wie wird sichergestellt, dass das Zielschema vorhanden ist?
+* Wie wird sichergestellt, dass keine redundanten Daten geladen werden?
+
 ## Mögliche Fehlerquellen
 
 * Der Flow wird nicht gestartet

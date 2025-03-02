@@ -54,8 +54,6 @@ services:
       - ./docker/docker-entrypoint-initnifi.d/nifi-init.sh:/opt/nifi/scripts/custom-entrypoint.sh
       - ./nifi-logs:/opt/nifi/nifi-current/logs
       - ./nifi-staging:/opt/nifi/nifi-current/data
-      - nifi_flow_storage:/opt/nifi/nifi-current/flow_storage
-      - nifi_database:/opt/nifi/nifi-current/database
       #- ./nifi/nifi.properties:/opt/nifi/nifi-current/conf/nifi.properties
     entrypoint: ["/bin/bash", "/opt/nifi/scripts/custom-entrypoint.sh"]
   db:
