@@ -15,7 +15,6 @@ VOLUME /opt/nifi/nifi-current/flow_storage
 VOLUME /opt/nifi/nifi-current/database
 
 # Ensure correct permissions (will only apply if volumes are not mounted externally)
-RUN chown -R nifi:nifi /opt/nifi/nifi-current/flow_storage
-RUN chown -R nifi:nifi /opt/nifi/nifi-current/database
+RUN chown -R nifi:nifi ${NIFI_BASE_DIR}
 
 USER ${UID}:${GID}
