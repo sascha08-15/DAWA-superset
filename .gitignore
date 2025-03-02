@@ -17,7 +17,7 @@
 *.bak
 *.db
 *.pyc
-**/*.sqllite
+**/*.sqlite
 *.swp
 __pycache__
 
