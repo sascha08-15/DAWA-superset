@@ -2,8 +2,8 @@ FROM apache/nifi:2.2.0
 
 USER nifi
 # Declare volumes (they will be managed by Docker)
-VOLUME /opt/nifi/nifi-current/flow_storage
-VOLUME /opt/nifi/nifi-current/database
+VOLUME ${NIFI_BASE_DIR}/flow_storage
+VOLUME ${NIFI_BASE_DIR}/database
 
 USER root
 
