@@ -75,14 +75,14 @@ Beachten Sie dabei, dass sämtliche Änderungen Ihrer Arbeit innerhalb der Docke
 
 Um neu zu starten, führen Sie folgende Schritte aus:
 
-* Alle Docker Images und Volumes können Sie mit `docker compose down --rmi all` löschen.
+* Alle Docker Images und Volumes können Sie mit `docker compose down --rmi all --volumes` löschen.
 * Stellen Sie sicher, dass Sie die neueste Version des repositories besitzen `git pull`.
 * Sollten Sie lokale Änderungen gemacht haben, führen Sie zunächst `git stash` aus, abschliessend `git pull`.
 * Abschliessend, führen Sie `docker compose up -d` aus oder alternativ `docker compose up` um direkt die Ausgabe auf dem Terminal zu sehen.
 
 Zusammenfassend können Sie mit Ausführung des nachstehenden Skripts nochmal neu beginnen.
 ```
-docker compose --rmi all
+docker compose --rmi all --volumes
 git stash
 git pull
 docker compose up -d
