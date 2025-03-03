@@ -4,6 +4,7 @@ USER nifi
 
 RUN mkdir /opt/nifi/nifi-current/flow_storage
 RUN mkdir /opt/nifi/nifi-current/database
+RUN mkdir /opt/nifi/nifi-current/nifi-logs
 
 # Declare volumes (they will be managed by Docker)
 VOLUME /opt/nifi/nifi-current/flow_storage /opt/nifi/nifi-current/database
