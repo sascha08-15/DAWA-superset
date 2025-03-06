@@ -135,27 +135,9 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 * URL: https://dbeaver.io/download/
 * Richten Sie sowohl die Datenquelle für Postgres ein als auch für die SQLite Datenbank
 
-## 
-
 ## SQLite Datenbank
 
-```sql
-SELECT 
-  count(*) AS count, 
-  va.name, 
-  CAST(strftime('%Y', datetime(va.application_date / 1000, 'unixepoch')) AS INTEGER) AS year,
-  CAST(strftime('%m', datetime(application_date / 1000, 'unixepoch')) AS INTEGER) AS month,
-  CASE 
-    WHEN strftime('%m', datetime(application_date / 1000, 'unixepoch')) IN ('01', '02', '03') THEN 'Q1'
-    WHEN strftime('%m', datetime(application_date / 1000, 'unixepoch')) IN ('04', '05', '06') THEN 'Q2'
-    WHEN strftime('%m', datetime(application_date / 1000, 'unixepoch')) IN ('07', '08', '09') THEN 'Q3'
-    WHEN strftime('%m', datetime(application_date / 1000, 'unixepoch')) IN ('10', '11', '12') THEN 'Q4'
-  END AS quarter
-FROM visa_application va, visa_application_documents vad, document d  
-where vad.documents_id = d.id AND vad.visa_application_id = va.id 
-GROUP BY year, va.name having YEAR < 2024
-```
-
+Öffnen Sie die SQLite Datenbank lokal (beachten Sie, das GIT Repository nochmals lokal und nicht auf dem Server zu clonen).
 
 Ihr Kollege schlägt vor zu analysieren welche Dokumente über die Jahre und Quartale eingereicht wurden für die Visaanträge.
 Dazu schlägt er folgendes Query vor:
