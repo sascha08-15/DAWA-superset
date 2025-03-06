@@ -138,6 +138,7 @@ Sollte das Problem und die Frage dennoch bestehen bleiben, liefern Sie mit:
 ## SQLite Datenbank
 
 Öffnen Sie die SQLite Datenbank lokal (beachten Sie, das GIT Repository nochmals lokal und nicht auf dem Server zu clonen).
+Machen Sie sich mit dem Schema vertraut.
 
 Ihr Kollege schlägt vor zu analysieren welche Dokumente über die Jahre und Quartale eingereicht wurden für die Visaanträge.
 Dazu schlägt er folgendes Query vor:
