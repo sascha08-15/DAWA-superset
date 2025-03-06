@@ -39,8 +39,8 @@ In dieser Übung werden Sie mit ETL (Extract, Transform, Load) vertraut. Dazu ve
 * Stellen Sie sicher, dass in der Datenbank DAWA die beiden Tabellen `document_fact` und `date_dimension` angelegt wurden.
 
 # Nifi Login
-* Öffnen sie die Nifi URL in ihrem Browser ``https://localhost:18443``, wobei Sie `localhost` mit dem Ihnen zugeteilten Hostnamen ersetzt müssen.
-* Akzeptieren Sie etwaig unsicheren Zugriff (wegen des nicht offiziellen HTTPs SSL-Zertifikats).
+* Öffnen Sie die Nifi URL in ihrem Browser ``https://localhost:18443``
+* Wenn Sie die Docker services nicht lokal ausführen, ersetzen Sie `localhost` mit dem Ihnen zugeteilten Hostnamen.
 
 # Nifi Flow importieren
 * Ziehen Sie eine Process Group auf das Nifi Canvas.
